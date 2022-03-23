@@ -1,8 +1,10 @@
 class Stack {
-    constructor(){
+    constructor() {
         this.top = 0;
-        this.arr = []
+        this.arr = [];
+        this.hash = {};
     }
+
     pop(){
         let result;
 
@@ -12,32 +14,37 @@ class Stack {
         }
         return result;
     }
-    push(item){
+
+    push(item) {
         this.arr[this.top++] = item;
+        this.hash[item] = this.hash[item] ? this.hash[item]++ : 1;
     }
-    length(){
+
+    length() {
         return this.top;
     }
+
     peek(){
         return this.arr[this.top-1];
     }
     clear(){
-        if(this.top < 0){
+        // if(this.top < 0){
             this.arr = []
             this.top = 0
-            return;
-        }
-        delete this.arr[this.top--];
-        this.clear();
+            // return;
+        // }
+        // delete this.arr[this.top--];
+        // this.clear();
 
     }
     contains(item){
-        for(let i = 0; i < this.top; i++){
-            if(this.arr[i] === item){
-                return true
-            }
-        }
-        return false
+        // for(let i = 0; i < this.top; i++){
+        //     if(this.arr[i] === item){
+        //         return true
+        //     }
+        // }
+        // return false
+        return this.hash[item] ? true : false;
     }
 }
 
@@ -86,3 +93,4 @@ myStack.push("blue")
 
 console.log("the lastest item", myStack.peek())
 console.log("current items in arr", myStack.arr)
+console.log("length",myStack.length())
